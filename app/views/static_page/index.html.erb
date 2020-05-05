@@ -1,13 +1,14 @@
 
-
+<a href="/gossips/new">Create New Gossip</a>
 <% Gossip.all.each do |gossip| %>
 <br>
   <div class="card" style="width: 20rem;">
     <div class="card-body">
       <h5 class="card-title"><%= gossip.title %></h5>
       <p class="card-text"><%= gossip.content %></p>
-      <a href="gossip/<%= gossip.id %>" class="card-link">Gossip Page</a>
+      <a href="gossips/<%= gossip.id %>" class="card-link">Gossip Page</a>
       <a href="/user/<%=gossip.user.id %>" class="card-link">About the Writer</a>
     </div>
   </div>
 <% end %>
+

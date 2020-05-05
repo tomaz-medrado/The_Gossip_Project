@@ -31,6 +31,12 @@
     </ul>
   </div>
 </nav>
+
+  <%flash.each do |name, msg|%>
+    <div class="alert alert-info ">
+      <%= msg %>
+
+  <%end%>
     <%= yield %>
   </body>
 </html>
