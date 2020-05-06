@@ -10,11 +10,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_06_165254) do
+ActiveRecord::Schema.define(version: 2020_05_06_202100) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
     t.string "slug"
+  end
+
+  create_table "comentarios", force: :cascade do |t|
+    t.text "texto"
+    t.integer "gossip_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["gossip_id"], name: "index_comentarios_on_gossip_id"
+  end
+
+  create_table "commentaries", force: :cascade do |t|
+    t.string "comment"
+    t.integer "gossip_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["gossip_id"], name: "index_commentaries_on_gossip_id"
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.integer "gossip_id"
+    t.string "comment"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["gossip_id"], name: "index_comments_on_gossip_id"
+  end
+
+  create_table "dogs", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "gossips", force: :cascade do |t|
@@ -34,4 +63,5 @@ ActiveRecord::Schema.define(version: 2020_05_06_165254) do
     t.string "city"
   end
 
+  add_foreign_key "comentarios", "gossips"
 end

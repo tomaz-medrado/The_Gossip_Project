@@ -11,7 +11,6 @@ class GossipsController < ApplicationController
 
   def new
     @gossip = Gossip.new
-    @commentary = Commentary.new
     # Méthode qui crée un potin vide et l'envoie à une view qui affiche le formulaire pour 'le remplir' (new.html.erb)
   end
 
@@ -47,6 +46,9 @@ class GossipsController < ApplicationController
 
   def destroy
     @gossip = Gossip.find(params[:id])
+    @gossip.comentarios.count.times do
+      @gossip.comentarios.first.destroy
+    end
     @gossip.destroy
 
     redirect_to '/'

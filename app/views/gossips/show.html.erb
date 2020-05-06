@@ -17,7 +17,29 @@
 <a style="margin:20px;" href="/" class="btn btn-primary">Home Page</a>
 <br>
 <br>
+<h2> <%= @gossip.comentarios.count %> Comments </h2>
+  
 
+<% @gossip.comentarios.each do |comentario| %>
+<br>
+  <div class="card" style="width: 20rem;">
+    <div class="card-body">
+      <p class="card-text"><%= comentario.texto %></p>
+    </div>
+  </div>
+<% end %>
+
+  <h3> Add a comment </h3>
+  <br>
+  <%= form_for ([@gossip, @gossip.comentarios.build]) do |f| %>
+  <p>
+    <%= f.label :texto %>
+    <%= f.text_area :texto%>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
 
 
 </div>

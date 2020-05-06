@@ -13,7 +13,9 @@ Rails.application.routes.draw do
   get 'welcome/:id',  to: 'user#welcome'
   get 'user/:id', to: 'user#profile'
 
-  resources 'gossips' 
+  resources 'gossips' do
+    resources 'comentarios'
+  end
 
-  resources 'categories'
+  resources 'categories' 
 end
