@@ -1,8 +1,23 @@
 
+<div class="container">
+  <h1>Create New Gossip! </h1>
+  <br>
+  <form action= <%= gossips_path %> method="POST">
 
-<form action= <%= gossips_path %> method="POST">
-  <input type="hidden" name="authenticity_token" value=<%= form_authenticity_token %> >
-  <input type="string" name="gossip_title">
-  <input type="content" name="gossip_content">
-  <input type="submit" value="Valider">
-</form>
+    <label>Title</title>
+    <div class="form-group">
+    <input type="hidden" name="authenticity_token" value=<%= form_authenticity_token %> >
+    <input style="border-radius: 4px;" type="string" name="gossip_title">
+    </div>
+
+    <label>Content</label>
+    <div class="form-group">
+    <input style="width:400px; height:80px; border-radius: 4px;" type="content" name="gossip_content">
+    </div>
+
+    <div class="form-group">    
+    <button class="btn btn-success", type="submit">Create</button>
+    </div>
+  </form>
+</div>
+

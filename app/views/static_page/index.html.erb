@@ -1,14 +1,21 @@
+<div class="container" style="background-color:#EEE; ">
+<br>
+<div>
+<a href="<%= new_gossip_path %>"class="btn btn-success">Create new Gossip</a>
+</div>
 
-<a href="/gossips/new">Create New Gossip</a>
+<br>
 <% Gossip.all.each do |gossip| %>
 <br>
   <div class="card" style="width: 20rem;">
     <div class="card-body">
       <h5 class="card-title"><%= gossip.title %></h5>
       <p class="card-text"><%= gossip.content %></p>
-      <a href="gossips/<%= gossip.id %>" class="card-link">Gossip Page</a>
-      <a href="/user/<%=gossip.user.id %>" class="card-link">About the Writer</a>
+      <a href="<%= gossip_path(gossip.id) %>"class="btn btn-primary">Gossip Page</a>
+      <a href="<%= edit_gossip_path(gossip.id) %>"class="btn btn-default">Update</a>
+      <a href="<%= gossip_path(gossip.id) %>"class="btn btn-danger" data-confirm="Are you sure?" data-method="DELETE">Delete</a>
     </div>
   </div>
 <% end %>
 
+</div>

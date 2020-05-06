@@ -1,4 +1,4 @@
-
+<div class="container" style="background-color:#EEE;">
 <br><br>
 
 <div class="card">
@@ -7,12 +7,17 @@
     <p class="card-text"><%=@gossip.content%></p>
   </div>
     <div class="card-header">
-      Created at: <%=@gossip.created_at%> by <%=@gossip.user.first_name%> <%=@gossip.user.last_name%> 
+      Created at: <%=@gossip.created_at%> by <%=@gossip.user.first_name%> <%=@gossip.user.last_name%> From <%=@gossip.user.city%>
   </div>
 </div>
 
-<br><br>
 
 <a href="/user/<%=@gossip.user.id%> " class="btn btn-primary">Check the Writer's Profile</a>
 
 <a style="margin:20px;" href="/" class="btn btn-primary">Home Page</a>
+<br>
+<br>
+
+
+
+</div>
