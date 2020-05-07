@@ -13,7 +13,17 @@
   <a href="/users/<%=@gossip.user.id%> " class="btn btn-primary">Check the Writer's Profile</a>
 
   <a style="margin: 20px;" href="/" class="btn btn-primary">Home Page</a>
-  <h2><%= @gossip.comments.count %> Comments</h2>
+
+  <p><%= @gossip.likes.count %> <%= (@gossip.likes.count) == 1 ? 'Like' : 'Likes'%></p>
+  <% if session[:user_id] %>
+    <% pre_like = @gossip.likes.find { |like| like.user_id == current_user.id} %>
+    <% if pre_like %>
+      <%= button_to 'Unlike', gossip_like_path(@gossip, pre_like),class:"btn btn-warning", method: :delete %>
+    <% else %>
+      <%= button_to 'Like', gossip_likes_path(@gossip),class:"btn btn-info", method: :post %>
+    <% end %>
+  <% end %>
+  <h2 class="my-3"><%= @gossip.comments.count %> Comments</h2>
 
   <% if !session[:user_id] %>
     <br>
