@@ -16,6 +16,7 @@ class GossipsController < ApplicationController
 
   def create
     @gossip = Gossip.new(title: params["gossip_title"], content: params["gossip_content"], user_id:6)
+    @gossip.user = User.find_by(id: session[:user_id])
     puts params
     
     if @gossip.save

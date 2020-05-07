@@ -1,7 +1,7 @@
 <div class="container" style="background-color:#EEE;">
 <br><br>
 
-<div class="card">
+<div class="card" style="border-radius: 11px;">
   <div class="card-body">
     <h5 class="card-title"><%=@gossip.title%></h5>
     <p class="card-text"><%=@gossip.content%></p>
@@ -22,11 +22,13 @@
 
 <% @gossip.comentarios.each do |comentario| %>
 <br>
-  <div class="card" style="width: 20rem;">
+  <p><%= comentario.name%> says: </p>
+  <div class="card" style="width: 30rem; border-radius:7px;">
     <div class="card-body">
       <p class="card-text"><%= comentario.texto %></p>
     </div>
   </div>
+  <br>
 <% end %>
 
   <h3> Add a comment </h3>
