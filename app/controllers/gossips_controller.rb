@@ -18,7 +18,7 @@ class GossipsController < ApplicationController
     @gossip = Gossip.new(title: params["gossip_title"], content: params["gossip_content"], user_id:6)
     @gossip.user = User.find_by(id: session[:user_id])
     puts params
-    
+
     if @gossip.save
       redirect_to '/'
     else
@@ -39,7 +39,7 @@ class GossipsController < ApplicationController
     @gossip.update(gossip_params)
 
     redirect_to gossip_path
-    
+
     # Méthode qui met à jour le potin à partir du contenu du formulaire de edit.html.erb, soumis par l'utilisateur
     # pour info, le contenu de ce formulaire sera accessible dans le hash params
     # Une fois la modification faite, on redirige généralement vers la méthode show (pour afficher le potin modifié)
@@ -47,8 +47,8 @@ class GossipsController < ApplicationController
 
   def destroy
     @gossip = Gossip.find(params[:id])
-    @gossip.comentarios.count.times do
-      @gossip.comentarios.first.destroy
+    @gossip.comments.count.times do
+      @gossip.comments.first.destroy
     end
     @gossip.destroy
 
