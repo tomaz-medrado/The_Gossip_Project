@@ -13,5 +13,10 @@
       Delete
     </a>
   </div>
+  <% if gossip.category %>
+  <div class="card-footer text-muted text-right">
+    <%= gossip.category.name %>
+  </div>
+  <% end %>
 </div>
 <% end %>
