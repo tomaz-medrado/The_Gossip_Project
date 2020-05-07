@@ -1,6 +1,12 @@
+<% if session[:user_id] %>
+  <h2>Welcome <%= User.find_by(id: session[:user_id]).first_name %>, hope you enjoy the Gossip's app!</h2>
+<% end %>
+
+<% if session[:user_id] %>
 <div class="text-right">
   <a href="<%= new_gossip_path %>" class="btn btn-success mb-3">Create new Gossip</a>
 </div>
+<% end %>
 
 <% Gossip.all.each do |gossip| %>
 <div class="card mb-3 mx-auto">
@@ -8,15 +14,23 @@
     <h5 class="card-title"><%= gossip.title %></h5>
     <p class="card-text"><%= gossip.content %></p>
     <a href="<%= gossip_path(gossip.id) %>" class="btn btn-primary">Gossip Page</a>
-    <a href="<%= edit_gossip_path(gossip.id) %>" class="btn btn-default">Update</a>
-    <a href="<%= gossip_path(gossip.id) %>" class="btn btn-danger" data-confirm="Are you sure?" data-method="DELETE">
-      Delete
-    </a>
+    <% if session[:user_id] %>
+      <% if User.find_by(id:session[:user_id]).id == gossip.user_id %>
+        <a href="<%= edit_gossip_path(gossip.id) %>" class="btn btn-default">Update</a>
+      <% end %>
+    <% end %>
+    <% if session[:user_id] %>
+      <% if User.find_by(id:session[:user_id]).id == gossip.user_id %>
+        <a href="<%= gossip_path(gossip.id) %>" class="btn btn-danger" data-confirm="Are you sure?" data-method="DELETE">Delete</a>
+      <% end %>
+    <% end %>
   </div>
+  
+  <div class="card-footer text-muted py-1">
+  <div class="d-flex justify-content-start">  <%= time_ago_in_words(gossip.created_at) %> ago </div>
   <% if gossip.category %>
-  <div class="card-footer text-muted text-right">
-    <%= gossip.category.name %>
-  </div>
+    <div class="d-flex justify-content-end"><%= gossip.category.name  %></div>
   <% end %>
+  </div>
 </div>
 <% end %>

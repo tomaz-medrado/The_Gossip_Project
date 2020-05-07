@@ -5,36 +5,43 @@
       <p class="card-text"><%=@gossip.content%></p>
     </div>
     <div class="card-header">
-      Created at: <%=@gossip.created_at%> by <%=@gossip.user.first_name%> <%=@gossip.user.last_name%> From
+      Created <%= time_ago_in_words(@gossip.created_at) %> ago by <%=@gossip.user.first_name%> <%=@gossip.user.last_name%> From
       <%=@gossip.user.city%>
     </div>
   </div>
 
-  <a href="/user/<%=@gossip.user.id%> " class="btn btn-primary">Check the Writer's Profile</a>
+  <a href="/users/<%=@gossip.user.id%> " class="btn btn-primary">Check the Writer's Profile</a>
 
   <a style="margin: 20px;" href="/" class="btn btn-primary">Home Page</a>
   <h2><%= @gossip.comments.count %> Comments</h2>
 
-  <% @gossip.comments.each do |comment| %>
-  <p><%= comment.name%> says:</p>
-  <div class="card" style="width: 30rem; border-radius: 7px;">
-    <div class="card-body">
-      <p class="card-text"><%= comment.texto %></p>
-    </div>
-  </div>
+  <% if !session[:user_id] %>
+    <br>
+    <strong><p>Log In to Check Comments and Comment! </p></strong>
   <% end %>
 
-  <div class="card mt-3">
-    <div class="card-body">
-      <h3>Add a comment</h3>
-      <%= form_for ([@gossip, @gossip.comments.build]) do |f| %>
-      <p>
-        <%= f.text_area :texto, class: "form-control mb-3" %>
-      </p>
-      <p>
-        <%= f.submit 'Create comment', class: "btn btn-primary" %>
-      </p>
-      <% end %>
+  <% if session[:user_id] %>
+    <% @gossip.comments.each do |comment| %>
+    <p><%= comment.name%> says:</p>
+    <div class="card" style="width: 30rem; border-radius: 7px;">
+      <div class="card-body">
+        <p class="card-text"><%= comment.texto %></p>
+      </div>
     </div>
-  </div>
+    <% end %>
+
+    <div class="card mt-3">
+      <div class="card-body">
+        <h3>Add a comment</h3>
+        <%= form_for ([@gossip, @gossip.comments.build]) do |f| %>
+        <p>
+          <%= f.text_area :texto, class: "form-control mb-3" %>
+        </p>
+        <p>
+          <%= f.submit 'Create comment', class: "btn btn-primary" %>
+        </p>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
 </div>

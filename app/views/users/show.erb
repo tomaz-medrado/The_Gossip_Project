@@ -1,0 +1,15 @@
+
+<h1><%= User.find_by(id:params["id"]).first_name %>'s Profile </h1>
+<br>
+<h3>Full name: <%= User.find_by(id:params["id"]).first_name%> <%= User.find_by(id:params["id"]).last_name %> </h3>
+<br>
+<h3>Member Since: <%= time_ago_in_words(User.find_by(id:params["id"]).created_at) %> </h3> 
+<br>
+<h3>Member Number: <%= User.find_by(id:params["id"]).id %> </h3>
+<br>
+<h3>City: <%= User.find_by(id:params["id"]).city %> </h3>
+<br>
+<h4><%= User.find_by(id:params["id"]).first_name %> has <%= User.find_by(id:params["id"]).gossips.count %> Gossips! </h3>
+<br>
+<a href="/" class="btn btn-primary">Home Page</a>
+

@@ -15,22 +15,31 @@
           <a class="nav-link" href="/static_page/contact">Contact</a>
         </li>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="<%= categories_path %>">Categorie</a>
-        </li>
+         <% if session[:user_id] %>
+          <li class="nav-item">
+            <a class="nav-link" href="<%= categories_path %>">Categorie</a>
+          </li>
+          <% end %>
       </ul>
 
       <ul class="navbar-nav">
+      <% if !session[:user_id] %>
         <li class="nav-item">
           <strong><a class="nav-link" href="/sign_up">Sign Up Here!</a></strong>
         </li>
+      <% end %>
+      <% if !session[:user_id] %>
         <li class="nav-item">
           <a class="nav-link" href="/sessions/new">Log In</a>
         </li>
+      <% end %>
+        
+        <% if session[:user_id] %>
+          <li class="nav-item">
+            <%= link_to "Log Out", session_path(session.id), class: 'btn btn-danger', method: :delete %>
+          </li>
+        <% end %>
 
-        <li class="nav-item">
-          <%= link_to "Log Out", session_path(session.id), class: 'btn btn-danger', method: :delete %>
-        </li>
       </ul>
     </div>
   </nav>
