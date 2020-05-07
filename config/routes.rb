@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-
-
   get 'sessions/new'
   get 'sessions/create'
   get 'sessions/destroy'
@@ -12,7 +10,6 @@ Rails.application.routes.draw do
   get 'categories/new'
   get 'categories/edit'
 
-  root 'static_page#index'
   get 'static_page/team'
   get 'static_page/contact'
 
@@ -23,6 +20,8 @@ Rails.application.routes.draw do
     resources 'comentarios'
   end
 
-  resources 'categories' 
+  resources 'categories'
   resources :sessions, only: [:new, :create, :destroy]
+
+  root 'static_page#index'
 end
